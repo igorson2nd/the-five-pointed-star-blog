@@ -1,0 +1,61 @@
+<div id="<%= dom_id comment %>" style="text-align: right;">
+
+  <div style="font-family: monospace; margin-left: 20px; border-right: 5px solid #ffd426; padding-right: 10px;">
+    <span style="white-space: pre-line;"><%= comment.text[0..1920] %></span>
+  </div>
+  <div >
+    − <span class="text-secondary" style="font-weight: bold;"><%= comment.user.username %></span>
+  </div>
+
+  <% if comment.reactions.present? %>
+    <div>
+      <a class="small" title="reactions" style="cursor: pointer;" onclick="document.getElementById('reactions_list_'+<%=comment.id%>).style.display='';document.getElementById('react_buttons_'+<%=comment.id%>).style.display='';this.style.display='none'">
+        <%= comment.reactions.count %>R
+      </a>
+    </div>
+    <div style="display: none;" id="reactions_list_<%=comment.id%>">
+      reactions: 
+      <% comment.reactions.each do |rea| %>
+        <div class="text-secondary">
+          <% rea_table = {"like" => "🖒", "smile" => ":)", "thumbs" => "🖒🖒🖒"} %>
+          <span style="font-weight: bolder; color: black;"><%= rea_table[rea.reaction_type] %></span>
+          <%= rea.user.username %>
+          <% if rea.user == current_user %>
+          <%#= button_to "Delete reaction", rea, method: :delete, class: "btn btn-danger btn-sm" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  
+  <% if comment.reactions.empty? %>
+    <div style="margin-top: -8px; font-weight: bolder;cursor: pointer;" onclick="document.getElementById('react_buttons_'+<%=comment.id%>).style.display='';this.style.display='none'"">
+      ...
+    </div>
+  <% end %>
+  <div id="react_buttons_<%=comment.id%>" style=" display: none;">
+    <% if comment.reactions.where(user: current_user).empty? %>
+      <div style="overflow: auto;">
+      <%= button_to "🖒🖒Thumbs🖒Up🖒🖒", "/reactions", method: :post, params: {reaction: {reaction_type: "thumbs", comment_id: comment.id, user_id: current_user.id}}, class: "btn btn-primary btn-sm", style: "float:right; margin-left:2px;" %>
+      <%= button_to ":) Smile", "/reactions", method: :post, params: {reaction: {reaction_type: "smile", comment_id: comment.id, user_id: current_user.id}}, class: "btn btn-primary btn-sm", style: "float:right; margin-left:2px;" %>
+      <%= button_to "🖒 Like", "/reactions", method: :post, params: {reaction: {reaction_type: "like", comment_id: comment.id, user_id: current_user.id}}, class: "btn btn-primary btn-sm", style: "float:right; margin-left:2px;" %>
+      </div>
+    <% end %>
+    <br>
+    <% if comment.user == current_user %>
+      <%= link_to "Edit Comment", edit_comment_path(comment), class: "btn btn-secondary btn-sm" %>
+      <%= button_to "Delete comment", comment, method: :delete, class: "btn btn-danger btn-sm", style: "margin-top:2px;" %>
+    <% end %>
+    <% if comment.reactions.where(user: current_user).any? %>
+      <%= link_to "Delele my reaction", "/delete_my_reactions/#{comment.id}", class: "btn btn-danger btn-sm", style: "margin-top:2px;" %>
+    <% end %>
+  </div>
+  
+  
+  <br>
+</div>
+
+<script>
+  
+</script>

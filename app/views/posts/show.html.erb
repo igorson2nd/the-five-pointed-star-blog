@@ -1,0 +1,27 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @post %>
+
+<div style="text-align: right;">
+  <% if @post.user == current_user %>
+    <%= button_to "Delete", @post, method: :delete, class: "btn btn-danger btn-sm", style: "float: right; margin-left:5px;" %>
+    <%= link_to "Edit", edit_post_path(@post), class: "btn btn-primary btn-sm" %>
+    <%#= link_to "Back to posts", posts_path %>
+  <% end %>
+</div>
+
+<br>
+<button type="button" class="btn btn-secondary btn-sm" onclick="comment_form.style.display=''; this.style.display='none';">
+  New Comment
+</button>
+<div style="display: none;" id="comment_form">
+  <%= render "comments/form", comment: @comment, post: @post %>
+</div>
+
+<hr>
+<h5>Comments:</h5>
+<div id="all_comments">
+<% @post.comments.each do |comment| %>
+  <%= render "comments/comment", comment: comment %>
+<% end %>
+</div>

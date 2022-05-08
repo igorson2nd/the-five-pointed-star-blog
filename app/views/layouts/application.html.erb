@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><<the five pointed star blog>>...></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
+
+  <body>
+  <div class="container">
+    <div style="text-align: right;">
+      <% if current_user.present? %>
+        <%= current_user.username %> | 
+        <a href="/logout">logout</a>
+      <% else %>
+        <a href="/log_reg_form">login/register</a>
+      <% end %>
+      
+    </div>
+    <hr style="margin: 3px;">
+
+    <div style="text-align: center;">
+      <br>
+      <h1>
+        <span style="font-weight: bold;">
+          <span style="color: #2bd9d9; font-weight: bolder;"> < </span>
+          <span style="color: #3dcc3d; font-weight: bolder;"> < </span>
+        </span>
+        the five pointed star blog
+        <span style="font-weight: bold;">
+          <span style="color: #ffd426; font-weight: bolder;"> > </span>
+          <span style="color: #f7578c; font-weight: bolder;"> > </span> ...
+          <span style="color: #00aaff; font-weight: bolder;"> > </span>
+        </span>
+        
+      </h1>
+    </div>
+    <hr style="margin-top: 31px; margin-bottom: 3px;">
+      <%= link_to "Posts", :posts %>
+    <hr style="margin-top: 3px;">
+
+    <div style="max-width: 650px;">
+    <%= yield %>
+    </div>
+  </div>
+  </body>
+</html>

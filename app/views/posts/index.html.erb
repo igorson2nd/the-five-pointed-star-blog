@@ -1,0 +1,31 @@
+<p style="color: green"><%= notice %></p>
+
+<h3>Posts</h3>
+<br>
+<%= link_to "New post", new_post_path, class: "btn btn-primary" %>
+<br><br>
+
+<div id="posts" style="max-width:650px;">
+  <% @posts.each do |post| %>
+    <div style="cursor: pointer;" onclick="window.location.href='/posts/<%=post.id%>'">
+      <%= render post %>
+    </div>
+    <div style="text-align: right;">
+    <% if post.comments.any? %><%= link_to "#{post.comments.count}C", post, title: "comments" %><%end%>
+    <% if current_user %>
+      <% if current_user.id == post.user.id %>
+        <%#= link_to "edit", edit_post_path(post) %>
+      <% end %>
+    <% end %>
+    <hr>
+    <div style="height:10px;"></div>
+  </div>
+    <!--
+    <p>
+      <%= link_to "Show this post", post %>
+    </p>
+    -->
+  <% end %>
+</div>
+
+

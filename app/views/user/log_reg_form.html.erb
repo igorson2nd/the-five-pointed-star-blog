@@ -1,0 +1,6 @@
+<h1>Login / register</h1>
+<%= bootstrap_form_with url: "/log_reg" do |form| %>
+  <%#= form.label :username, "Username:" %>
+  <%= form.text_field :username %>
+  <%= form.submit "Next" %>
+<% end %>
