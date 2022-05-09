@@ -9,7 +9,7 @@
 
   <% if comment.reactions.present? %>
     <div>
-      <a class="small" title="reactions" style="cursor: pointer;" onclick="document.getElementById('reactions_list_'+<%=comment.id%>).style.display='';document.getElementById('react_buttons_'+<%=comment.id%>).style.display='';this.style.display='none'">
+      <a class="small" title="reactions" style="cursor: pointer;" onclick="document.getElementById('reactions_list_'+<%=comment.id%>).style.display='';this.style.display='none';document.getElementById('react_buttons_'+<%=comment.id%>).style.display='';">
         <%= comment.reactions.count %>R
       </a>
     </div>
@@ -28,7 +28,7 @@
     </div>
   <% end %>
 
-  
+  <% if current_user %>
   <% if comment.reactions.empty? %>
     <div style="margin-top: -8px; font-weight: bolder;cursor: pointer;" onclick="document.getElementById('react_buttons_'+<%=comment.id%>).style.display='';this.style.display='none'"">
       ...
@@ -51,6 +51,7 @@
       <%= link_to "Delele my reaction", "/delete_my_reactions/#{comment.id}", class: "btn btn-danger btn-sm", style: "margin-top:2px;" %>
     <% end %>
   </div>
+  <% end %>
   
   
   <br>

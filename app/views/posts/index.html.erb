@@ -1,9 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
 <h3>Posts</h3>
+<% if current_user %>
 <br>
 <%= link_to "New post", new_post_path, class: "btn btn-primary" %>
 <br><br>
+<% end %>
 
 <div id="posts" style="max-width:650px;">
   <% @posts.each do |post| %>
