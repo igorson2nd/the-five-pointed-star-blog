@@ -76,3 +76,6 @@ gem "bootstrap", "~> 5.1"
 gem "jquery-rails", "~> 4.4"
 
 gem "bootstrap_form", "~> 5.0"
+
+gem "graphql", "~> 2.0"
+gem "graphiql-rails", group: :development
