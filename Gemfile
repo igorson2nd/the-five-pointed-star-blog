@@ -79,3 +79,5 @@ gem "bootstrap_form", "~> 5.0"
 
 gem "graphql", "~> 2.0"
 gem "graphiql-rails", group: :development
+
+gem "mysql2", "~> 0.5.4"

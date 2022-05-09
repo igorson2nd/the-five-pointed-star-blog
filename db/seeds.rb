@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+User.create!(username: 'igor')
+
+Post.create(text: "This is the sample post \nspanning multiple \nlines.", user: User.first)
+Post.create(text: "Feel free to click here and make some comments. \nIt's fun!", user: User.first)
+
+Comment.create(text: "Very cool!", post: Post.last, user: User.first)
